@@ -1,0 +1,36 @@
+# Build output
+/target/
+**/target/
+/dist/
+
+# Disk / VM images and logs
+*.iso
+*.img
+*.vdi
+*.vbox
+*.vbox-prev
+*.log
+*.bin
+
+# Local / agent working directories (not part of the source tree)
+/.agents/
+/work/
+/scratch/
+/outputs/
+
+# Scratch notes and compiler dumps
+/cargo_errors.txt
+/not.txt
+*.rcgu.o
+rust_out*
+
+# Python / editor / OS
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Compiler error dumps
+errors.txt

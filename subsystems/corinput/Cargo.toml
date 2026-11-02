@@ -1,0 +1,10 @@
+[package]
+name = "corinput"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "corinput"
+path = "src/lib.rs"

@@ -1,0 +1,10 @@
+[package]
+name = "corpower"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "corpower"
+path = "src/lib.rs"

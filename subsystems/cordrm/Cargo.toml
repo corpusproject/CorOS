@@ -1,0 +1,10 @@
+[package]
+name = "cordrm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "cordrm"
+path = "src/lib.rs"

@@ -1,0 +1,10 @@
+[package]
+name = "corwifi"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "corwifi"
+path = "src/lib.rs"

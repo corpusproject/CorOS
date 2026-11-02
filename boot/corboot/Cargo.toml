@@ -1,0 +1,15 @@
+[package]
+name = "corboot"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+corboot-info = { path = "../../shared/corboot-info" }
+
+[[bin]]
+name = "corboot"
+path = "src/main.rs"
+test = false
+bench = false

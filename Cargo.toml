@@ -1,0 +1,46 @@
+[workspace]
+members = [
+    "boot/corboot",
+    "kernel/corkernel",
+    "shared/corboot-info",
+    "subsystems/corsyscall",
+    "subsystems/cordrivers",
+    "subsystems/corvfs",
+    "subsystems/cornet",
+    "subsystems/corcrypto",
+    "subsystems/corcoreutils",
+    "subsystems/cormm",
+    "subsystems/corvirt",
+    "subsystems/corsound",
+    "subsystems/corsec",
+    "subsystems/coripc",
+    "subsystems/corbpf",
+    "subsystems/cordrm",
+    "subsystems/corpower",
+    "subsystems/corinput",
+    "subsystems/corblock",
+    "subsystems/corsched",
+    "subsystems/cortoolchain",
+    "subsystems/corhwdb",
+    "subsystems/corwifi",
+    "subsystems/corunicode",
+    "subsystems/corfsdb",
+]
+default-members = ["boot/corboot", "kernel/corkernel"]
+resolver = "2"
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = true
+codegen-units = 1
+opt-level = "s"
+strip = false

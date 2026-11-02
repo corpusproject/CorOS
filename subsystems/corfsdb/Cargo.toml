@@ -1,0 +1,10 @@
+[package]
+name = "corfsdb"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "corfsdb"
+path = "src/lib.rs"

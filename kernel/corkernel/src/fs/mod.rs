@@ -1,0 +1,63 @@
+//! CorOS Pure Native Filesystem Subsystem.
+//! 100% in-house implementations of MBR, FAT32, Ext2, Inode/Dentry Page Cache,
+//! synthetic /proc, /sys device hierarchies, ISO9660, TarFS, NTFS, Btrfs, RamDisk, and VFS Pipeline. Zero external crates.
+
+pub mod fat32;
+pub mod ext2;
+pub mod png;
+pub mod vfs;
+pub mod vfs_cache;
+pub mod procfs;
+pub mod sysfs;
+pub mod ramfs;
+pub mod devfs;
+pub mod iso9660;
+pub mod tarfs;
+pub mod mbr;
+pub mod ntfs;
+pub mod btrfs;
+pub mod ramdisk;
+pub mod vfs_pipeline;
+pub mod raid;
+pub mod journaling;
+pub mod exfat;
+pub mod zfs;
+pub mod squashfs;
+pub mod ext4;
+pub mod xfs;
+pub mod f2fs;
+pub mod overlayfs;
+pub mod fuse;
+pub mod nfs;
+pub mod smb;
+pub mod block_pipeline;
+
+pub use block_pipeline::{VfsBlockPipeline, GLOBAL_BLOCK_PIPELINE};
+pub use ext4::{Ext4FileSystem, Ext4Superblock, Ext4Inode, Ext4Extent, Ext4ExtentHeader};
+pub use xfs::{XfsFileSystem, XfsSuperblock, XfsInode, XfsAgf, XfsExtent, XfsForkFormat, XfsShortformEntry, XfsDir2SfHdr};
+pub use f2fs::{F2fsFileSystem, F2fsSuperblock, F2fsCheckpoint, F2fsInode, F2fsNatEntry, F2fsCurlogType, F2fsDentryBlock, F2fsDirEntry, F2fsNodeFooter, F2fsDecodedDentry};
+pub use overlayfs::{OverlayFileSystem, OverlayNode, OverlayEntryType};
+pub use fuse::{FuseSession, FuseInHeader, FuseOutHeader, FuseKernelRequest, FuseKernelResponse};
+pub use nfs::{NfsClient, NfsFileHandle, NfsFattr3, NfsFileType};
+pub use smb::{SmbClient, Smb2Header};
+pub use squashfs::SquashfsFileSystem;
+pub use fat32::{DirEntryInfo, Fat32FileSystem, FsError};
+pub use ext2::{Ext2FileSystem, Ext2Inode, Ext2Superblock, Ext2DirEntry, BlockDevice};
+pub use png::{decode_png_to_rgba, encode_rgba_to_png};
+pub use vfs::{GLOBAL_VFS, VfsNode, VfsRouter};
+pub use vfs_cache::{DentryCache, InodeCache, PageCache, DentryType};
+pub use procfs::ProcFs;
+pub use sysfs::SysFs;
+pub use ramfs::{RamFileSystem, RamInode, RamNodeContent};
+pub use devfs::{DevFs, DevNode, StandardDevice, DeviceType};
+pub use iso9660::{Iso9660FileSystem, IsoFileEntry, IsoPrimaryVolumeDescriptor, RockRidgeRecords, SuspHeader, parse_joliet_name, parse_rock_ridge_susp};
+pub use tarfs::{TarArchive, TarEntry};
+pub use mbr::{MbrTable, MbrPartition};
+pub use ntfs::{NtfsVolume, NtfsEntry, NtfsBootSector, MftRecordHeader, DataRun};
+pub use btrfs::{BtrfsVolume, BtrfsSuperBlock, BtrfsNodeEntry, BtrfsDiskKey, BtrfsChunk, BtrfsStripe, BtrfsKeyPtr, BtrfsFileExtentItem};
+pub use ramdisk::{RamDiskDevice, RamFs, RamFsInode, RamDiskError};
+pub use vfs_pipeline::{VfsPipeline, MountEntry, FsType, VfsFileHandle};
+pub use raid::{RaidArray, RaidLevel, RaidState, RaidDiskMember};
+pub use journaling::{Jbd2Journal, Jbd2Header, Jbd2Superblock, JournalTransaction};
+pub use exfat::{ExfatFileSystem, ExfatBootSector, ExfatNode};
+pub use zfs::{ZfsStoragePool, ZfsUberblock, ZfsBlockPointer, Fletcher4, ZfsDnodePhys, MicroZapHeader, MicroZapEntry, MicroZapParser, ZfsZnodePhys};

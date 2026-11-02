@@ -1,0 +1,37 @@
+[package]
+name = "corkernel"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+corboot-info = { path = "../../shared/corboot-info" }
+corsyscall = { path = "../../subsystems/corsyscall" }
+cordrivers = { path = "../../subsystems/cordrivers" }
+corvfs = { path = "../../subsystems/corvfs" }
+cornet = { path = "../../subsystems/cornet" }
+corcrypto = { path = "../../subsystems/corcrypto" }
+corcoreutils = { path = "../../subsystems/corcoreutils" }
+cormm = { path = "../../subsystems/cormm" }
+corvirt = { path = "../../subsystems/corvirt" }
+corsound = { path = "../../subsystems/corsound" }
+corsec = { path = "../../subsystems/corsec" }
+coripc = { path = "../../subsystems/coripc" }
+corbpf = { path = "../../subsystems/corbpf" }
+cordrm = { path = "../../subsystems/cordrm" }
+corpower = { path = "../../subsystems/corpower" }
+corinput = { path = "../../subsystems/corinput" }
+corblock = { path = "../../subsystems/corblock" }
+corsched = { path = "../../subsystems/corsched" }
+cortoolchain = { path = "../../subsystems/cortoolchain" }
+corhwdb = { path = "../../subsystems/corhwdb" }
+corwifi = { path = "../../subsystems/corwifi" }
+corunicode = { path = "../../subsystems/corunicode" }
+corfsdb = { path = "../../subsystems/corfsdb" }
+
+[[bin]]
+name = "corkernel"
+path = "src/main.rs"
+test = true
+bench = false

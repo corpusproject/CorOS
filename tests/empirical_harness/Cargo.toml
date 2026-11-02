@@ -1,0 +1,40 @@
+[package]
+name = "empirical_harness"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+
+[dependencies]
+corboot-info = { path = "../../shared/corboot-info" }
+corsyscall = { path = "../../subsystems/corsyscall" }
+cordrivers = { path = "../../subsystems/cordrivers" }
+corvfs = { path = "../../subsystems/corvfs" }
+cornet = { path = "../../subsystems/cornet" }
+corcrypto = { path = "../../subsystems/corcrypto" }
+corcoreutils = { path = "../../subsystems/corcoreutils" }
+cormm = { path = "../../subsystems/cormm" }
+corvirt = { path = "../../subsystems/corvirt" }
+corsound = { path = "../../subsystems/corsound" }
+corsec = { path = "../../subsystems/corsec" }
+coripc = { path = "../../subsystems/coripc" }
+corbpf = { path = "../../subsystems/corbpf" }
+cordrm = { path = "../../subsystems/cordrm" }
+corpower = { path = "../../subsystems/corpower" }
+corinput = { path = "../../subsystems/corinput" }
+corblock = { path = "../../subsystems/corblock" }
+corsched = { path = "../../subsystems/corsched" }
+cortoolchain = { path = "../../subsystems/cortoolchain" }
+
+[[bin]]
+name = "empirical_harness"
+path = "src/main.rs"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = false
+opt-level = "s"
