@@ -1,6 +1,15 @@
 # CorOS v1.0
 
+[![License](https://img.shields.io/github/license/corpusproject/CorOS?label=license)](LICENSE)
+[![Language](https://img.shields.io/badge/language-Rust-orange?logo=rust)](https://www.rust-lang.org/)
+[![Platform](https://img.shields.io/badge/platform-x86__64%20UEFI-blue)](#)
+[![Status](https://img.shields.io/badge/status-research%20%2F%20hobby-lightgrey)](#known-limitations)
+
 *An experimental operating-system project by Corpus Studio.*
+
+**English** · [Türkçe](README.tr.md)
+
+![CorOS wallpaper preview — not a screenshot of a running desktop](assets/wallpapers/wallpaper.png)
 
 CorOS is an independent x86_64 **UEFI** operating-system project written in pure
 `#![no_std]` Rust, with **zero external crate dependencies**. Its own UEFI loader
@@ -11,15 +20,18 @@ desktop and PS/2 keyboard/mouse input.
 > not a Linux replacement and has not been validated on real hardware. Read
 > [Known limitations](#known-limitations) before relying on the feature descriptions below.
 
-## Contents
+## Quick start
 
-- [Features](#features)
-- [Repository layout](#repository-layout)
-- [Build and run](#build-and-run)
-- [Testing](#testing)
-- [Known limitations](#known-limitations)
-- [License](#license)
-- [Türkçe özet](#türkçe-özet)
+On Windows, install Rust stable and Python 3, then run these commands in PowerShell
+(the UEFI target may need to be installed once with `rustup target add x86_64-unknown-uefi`):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/build.ps1 -StageEfiFiles
+powershell -ExecutionPolicy Bypass -File tools/run-vbox.ps1 -Iso
+```
+
+To create the optional hybrid ISO, add `-MakeIso` to the build command. The ISO is
+approximately 2.2 GB; most of its non-ESP contents are placeholders (see limitations).
 
 ## Features
 
@@ -48,52 +60,25 @@ desktop and PS/2 keyboard/mouse input.
 | `docs/` | Early design notes (boot, memory, interrupts, toolchain) |
 | `assets/` | Icons, fonts, and wallpapers |
 
-## Build and run
+## Build and test
 
-The commands below use **Windows PowerShell**. Requirements: Rust stable (see
-`rust-toolchain.toml`), the `x86_64-unknown-uefi` target, and Python 3. Install the
-target if needed:
-
-```powershell
-rustup target add x86_64-unknown-uefi
-```
-
-Type-check the workspace:
+Requirements: Rust stable (see `rust-toolchain.toml`), the `x86_64-unknown-uefi`
+target, Windows PowerShell, and Python 3.
 
 ```powershell
+# Type-check the workspace
 cargo check --workspace --target x86_64-unknown-uefi
-```
 
-Build the release binaries and stage the EFI System Partition tree under `dist/esp`:
-
-```powershell
+# Build and stage the EFI System Partition files
 powershell -ExecutionPolicy Bypass -File tools/build.ps1 -StageEfiFiles
+
+# Run the E2E model tests (they do not execute the kernel)
+py -3 tests/e2e/run_e2e_tests.py
 ```
 
-To also produce the hybrid UEFI live ISO (`dist/coros.iso`, approximately 2.2 GB):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File tools/build.ps1 -StageEfiFiles -MakeIso
-```
-
-Run the ISO in VirtualBox:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File tools/run-vbox.ps1 -Iso
-```
-
-Click inside the VM window to capture the mouse; press **Right Ctrl** (the Host Key)
-to release it. Serial output is written to `outputs/serial.log`.
-
-## Testing
-
-```powershell
-py -3 tests/e2e/run_e2e_tests.py       # 590 E2E model tests
-py -3 tools/scale_coros_50m.py         # uniqueness audit (no synthetic numbered templates)
-```
-
-The E2E suite models intended behaviour; it does not boot or execute the kernel. See
-[Known limitations](#known-limitations).
+For VirtualBox, run `powershell -ExecutionPolicy Bypass -File tools/run-vbox.ps1 -Iso`.
+Click inside the VM to capture the mouse; press **Right Ctrl** (Host Key) to release it.
+Serial output is written to `outputs/serial.log`.
 
 ## Known limitations
 
@@ -108,17 +93,3 @@ The E2E suite models intended behaviour; it does not boot or execute the kernel.
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
----
-
-## Türkçe özet
-
-CorOS v1.0, saf `no_std` Rust ile yazılmış, harici crate bağımlılığı olmayan,
-UEFI ile açılan deneysel bir x86_64 işletim sistemi projesidir. Kendi UEFI yükleyicisi
-CorBoot üzerinden CorKernel çekirdeğini başlatır; framebuffer tabanlı bir masaüstü ve
-PS/2 klavye/fare desteği sunar. Projede Görev Yöneticisi, ses çalar, ağ paketi analiz
-arayüzü ve 22 bağımsız alt sistem crate'i de bulunur.
-
-**Önemli:** CorOS bir Linux alternatifi değildir ve gerçek donanımda doğrulanmamıştır.
-ISO içeriğinin büyük bölümü yer tutucudur; E2E testleri çekirdeği çalıştırmaz. Diğer
-sınırlamalar için [Known limitations](#known-limitations) bölümüne bakın.
